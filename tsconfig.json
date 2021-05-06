@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "module": "commonjs", // nodejs를 평범하게 사용하게 하면서 다양한것을 import 또는 export할수있게함.
+        "target": "ES2015", // 어떤 버전의 JS로 컴파일 되고 싶은지 기입
+        "sourceMap": true 
+    },
+    // 어떤파일들이 컴퍼일 과정에서 포함되는지 적는 영역
+    "include": ["index.ts"], // 포함
+    "exclude": ["node_modules"]
+}
