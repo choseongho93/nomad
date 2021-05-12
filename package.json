@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/choseongho93/typechain#readme",
   "dependencies": {
+    "crypto-js": "^4.0.0",
     "typescript": "^4.2.4"
   },
   "devDependencies": {
