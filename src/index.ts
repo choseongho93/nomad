@@ -61,18 +61,45 @@ const createNewBlock = (data: string): Block => {
     const nextHash: string = Block.calculateBlockHash(newIndex, previousBlock.hash, nextTimestamp, data);
     const newBlock: Block = new Block(newIndex, nextHash, previousBlock.hash, data, nextTimestamp);
 
+    addBlock(newBlock);
     return newBlock;
 }
 
-const isBlockValid = (candidateBlock: Block, previousBlock: Block): boolean => {
-    if (!Block.validateStructure(candidateBlock)) {
-      return false;
-    } else if (previousBlock.index + 1 !== candidateBlock.index) {
-      return false;
-    } else if (previousBlock.hash !== candidateBlock.previousHash) {
-      return false;
-    }
-}
+// 블록체인 해쉬계산
+const getHashforBlock = (aBlock: Block): string =>
+    Block.calculateBlockHash(
+        aBlock.index,
+        aBlock.previousHash,
+        aBlock.timestamp,
+        aBlock.data
+    );
 
+// 블록체인 유효성 검사 체크
+const isBlockValid = (candidateBlock: Block, previousBlock: Block): boolean => {
+    if (!Block.validateStructure(candidateBlock)) { // 블록체인 값 여부 체크
+        return false;
+    } else if (previousBlock.index + 1 !== candidateBlock.index) { // 이전 블록체인 인덱스와 값이 같으면 안되기에 체크 
+        return false;
+    } else if (previousBlock.hash !== candidateBlock.previousHash) { // 이전 블록체인 해쉬값과 같으면 안되기에 체크
+        return false;
+    } else if (getHashforBlock(candidateBlock) !== candidateBlock.hash) { // 추가할 블록체인 해쉬를 함수를 통해 가져와서 매개변수로 받은 해쉬의 값이 같은지 비교
+        return false;
+    } else {
+        return true;
+    }
+};
+
+// 블록체인 추가
+const addBlock = (candidateBlock: Block): void => {
+    if (isBlockValid(candidateBlock, getLatestBlock())) {
+        blockchain.push(candidateBlock);
+    }
+};
+
+createNewBlock("second block");
+createNewBlock("third block");
+createNewBlock("fourth block");
+
+console.log(blockchain);
 
 export { };
