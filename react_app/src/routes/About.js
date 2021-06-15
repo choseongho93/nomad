@@ -1,6 +1,7 @@
 import React from "react";
+import "./About.css";
 
-function About(){
+function About(props){
     return <span>About</span>
 }
 
