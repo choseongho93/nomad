@@ -21,7 +21,7 @@ class Home extends React.Component {
     this.setState({ movies, isLoading: false });
   };
 
-  // 랜더링하기 전에 실행되는 함수 
+  // 랜더링한후에 실행되는 함수 
   componentDidMount() {
     this.getMovies();
   }
