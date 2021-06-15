@@ -8,6 +8,8 @@ class Home extends React.Component {
     isLoading: true,
     movies: []
   };
+
+  // movies를 가져오는 함수
   getMovies = async () => {
     const {
       data: {
@@ -18,9 +20,13 @@ class Home extends React.Component {
     );
     this.setState({ movies, isLoading: false });
   };
+
+  // 랜더링하기 전에 실행되는 함수 
   componentDidMount() {
     this.getMovies();
   }
+
+  // 랜더링
   render() {
     const { isLoading, movies } = this.state;
     return (
